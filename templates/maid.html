@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% block main %}
+<h1><a href="/">Back</a></h1>
+<h1>{{ name }}</h1>
+<hr>
+<h1>Character Creation</h1>
+<h2>Step 1: Attributes</h2>
+Roll 2D6 and divide by 3 (rounding down) for each of the six Attributes below.<br>
+<b>Athletics</b> Physical ability, combat ability
+{{dice_img|safe}}{{dice_img|safe}} → {{display.0.at.0}} + {{display.0.at.1}} = {{display.0.at.0 + display.0.at.1}} / 3 = <b>{{display.0.at.2}}</b>
+<br>
+<b>Affection</b> How good are you at forming bonds with your master and the other maids?
+{{dice_img|safe}}{{dice_img|safe}} → {{display.0.af.0}} + {{display.0.af.1}} = {{display.0.af.0 + display.0.af.1}} / 3 = <b>{{display.0.af.2}}</b>
+<br>
+<b>Skill</b> How good are you at your maid duties?
+{{dice_img|safe}}{{dice_img|safe}} → {{display.0.sk.0}} + {{display.0.sk.1}} = {{display.0.sk.0 + display.0.sk.1}} / 3 = <b>{{display.0.sk.2}}</b>
+<br>
+<b>Cunning</b> How capable are you at tricking enemies and other maids, and deceiving the master?
+{{dice_img|safe}}{{dice_img|safe}} → {{display.0.cu.0}} + {{display.0.cu.1}} = {{display.0.cu.0 + display.0.cu.1}} / 3 = <b>{{display.0.cu.2}}</b>
+<br>
+<b>Luck</b> Just how lucky are you?
+{{dice_img|safe}}{{dice_img|safe}} → {{display.0.lu.0}} + {{display.0.lu.1}} = {{display.0.lu.0 + display.0.lu.1}} / 3 = <b>{{display.0.lu.2}}</b>
+<br>
+<b>Will</b> How positive and constructive is your thinking?
+{{dice_img|safe}}{{dice_img|safe}} → {{display.0.wi.0}} + {{display.0.wi.1}} = {{display.0.wi.0 + display.0.wi.1}} / 3 = <b>{{display.0.wi.2}}</b>
+<h2>Step 2: Maid Types</h2>
+Roll 1D6 twice to get two Maid Types; you can have a particular Maid Type twice.<br>
+{{dice_img|safe}}{{display.1.0.0}} → {{display.1.0.1}}<br>
+{{dice_img|safe}}{{display.1.1.0}} → {{display.1.1.1}}<br>
+<h3>Resulting Attributes</h3>
+Athletics: {{ charsheet_dict.attrs.at }}, Affection: {{ charsheet_dict.attrs.af }}, Skill: {{ charsheet_dict.attrs.sk }}, Cunning: {{ charsheet_dict.attrs.cu }}, Luck: {{ charsheet_dict.attrs.lu }}, Will: {{ charsheet_dict.attrs.wi }}
+<h2>Step 3: Maid Colors</h2>
+Roll d66 on the Maid Color Table, and combine the two colors to determine the color of your maid’s uniform. You may also use this table to roll for your maid’s eye and hair colors.<br>
+<b>Uniform:</b> {{dice_img|safe}}{{dice_img|safe}} → {{display.2.0.0}} = {{display.2.0.1}} <b>and</b> {{dice_img|safe}}{{dice_img|safe}} → {{display.2.1.0}} = {{display.2.1.1}}<br>
+<b>Eyes:</b> {{dice_img|safe}}{{dice_img|safe}} → {{display.2.2.0}} = {{display.2.2.1}}<br>
+<b>Hair:</b> {{dice_img|safe}}{{dice_img|safe}} → {{display.2.3.0}} = {{display.2.3.1}}
+<h2>Step 4: Special Qualities</h2>
+The next step is to determine your maid’s Special Qualities. These are various physical, mental, or social traits that distinguish a maid from her fellows. Normally maids get two Special Qualities, but the GM may wish to increase this to between 3 and 5 in order to make the game more interesting. If this is the case, please ask your GM to roll additional qualities.<br>
+To determine the maid’s Special Qualities, roll 1D66 on the Maid Special Quality Table below. Maid Qualities 41-66 will roll on a secondary table, what specific Quality they mean you have. If you happen to roll the exact same Special Quality Twice, you just get that single Quality.<br>
+{{dice_img|safe}}{{dice_img|safe}} → {{display.3.0.0}} = {{display.3.0.1}}
+{% if display.3.0.0>40 %}
+        {{dice_img|safe}} → {{display.3.0.2}} = {{display.3.0.3}}
+{% endif %}<br>
+{{dice_img|safe}}{{dice_img|safe}} → {{display.3.1.0}} = {{display.3.1.1}}
+{% if display.3.1.0>40 %}
+        {{dice_img|safe}} → {{display.3.1.2}} = {{display.3.1.3}}
+{% endif %}<br>
+<h2>Step 5: Etcetera</h2>
+Roll 1D66 on the Maid Roots and Stress Explosion tables. If you are using Maid Weapon tables or the optional Items, roll for these as well.<br>
+<b>Maid Roots:</b>{{dice_img|safe}}{{dice_img|safe}} → {{ display.4.root.0 }} = {{ display.4.root.1 }}<br>
+<b>Stress Explosion:</b>{{dice_img|safe}}{{dice_img|safe}} → {{ display.4.stress.0 }} = {{ display.4.stress.1 }}
+<h3>Optional things</h3>
+<b>Weapon:</b>{{dice_img|safe}}{{dice_img|safe}} → {{ display.4.weapon.0 }} = {{ display.4.weapon.1 }}<br>
+<b>Item:</b>{{dice_img|safe}}{{dice_img|safe}}{{dice_img|safe}} → {{ display.4.item.0 }} = {{ display.4.item.1 }} – For more information on what exactly your item does, please ask your GM, telling them, that items start at p. 93.
+<h2>Step 6: Maid Power</h2>
+Find your highest Attribute, and roll 1D6 on the corresponding Maid Power Table. If two or more attributes are tied for highest, you may choose which table to use. Also, if the total of all your attributes is 9 or less, you can choose two Maid Powers.<br>
+{% if extra_power %}
+        You have low stats, thus you get two Maid Powers. If you don't get to choose from two or more right now, please ask your GM to roll another Maid Power.<br>
+{% endif %}
+<h3>Choose one:</h3>
+{% for power in display.5.power %}
+{% if power.0 == "at" %}Athletics{%elif power.0 == "af"%}Affection{%elif power.0 == "sk"%}Skill{%elif power.0 == "cu"%}Cunning{%elif power.0 == "lu"%}Luck{%elif power.0 == "wi"%}Will{%endif%}
+→
+{{dice_img|safe}} → {{power.1}} = {{power.2}}<br>
+{% endfor %}
+<h2>Step 7: Favor and Spirit</h2>
+Your starting Favor is equal to your Affection score, times two.<br>
+Your Spirit is equal to your Will score, times ten.<br>
+Both of these can start off at zero if the corresponding attribute is zero, making the character initially far more vulnerable to dismissal (in the case of Favor) or Stress Explosions (in the case of Spirit), but something has to happen during the game for either of these to be triggered.<br>
+<b>Starting Favor:</b> Affection = {{ charsheet_dict.attrs.af }} * 2 = {{ charsheet_dict.favor }}<br>
+<b>Spirit:</b> Will = {{ charsheet_dict.attrs.wi }} * 10 = {{ charsheet_dict.spirit }}<br>
+
+<h2>Step 8: Name and Age</h2>
+Finally, write down your maid’s name and age. Determine these however you wish.<br>
+If you chose a name for this tool to create a maid with, you already have a name, and only have to assign an age.
+<hr>
+<h1>Character Sheet</h1>
+<table border=1>
+<tr><td><b>Name</b></td><td>{{name}}</td><td><b>Age</b></td><td>…</td></tr>
+<tr><td><b>Maid Colors</b></td></tr>
+<tr><td><b>Clothes</b></td><td>{{charsheet_dict.colors.0}}/{{charsheet_dict.colors.1}}</td><td><b>Eyes</b></td><td>{{charsheet_dict.colors.2}}</td><td><b>Hair</b></td><td>{{charsheet_dict.colors.3}}</td></tr>
+<tr><td><b>Maid Types</b></td><td>{{charsheet_dict.types.0}}/{{charsheet_dict.types.1}}</td></tr>
+<tr><td><b>Special Qualities</b></td><td>{{charsheet_dict.qualities.0}}</td><td>{{charsheet_dict.qualities.1}}</td></tr>
+<tr><td><b>Maid Roots</b></td><td>{{charsheet_dict.root}}</td><td><b>Stress Explosion</b></td><td>{{charsheet_dict.explosion}}</td></tr>
+<tr><td><b>Maid Power</b></td><td>{{charsheet_dict.powers|safe}}</td></tr>
+<tr><td><b>Attributes</b></td></tr>
+<tr><td>Athletics</td><td>Affection</td><td>Skill</td><td>Cunning</td><td>Luck</td><td>Will</td></tr>
+<tr><td>{{ charsheet_dict.attrs.at }}</td><td>{{ charsheet_dict.attrs.af }}</td><td>{{ charsheet_dict.attrs.sk }}</td><td>{{ charsheet_dict.attrs.cu }}</td><td>{{ charsheet_dict.attrs.lu }}</td><td>{{ charsheet_dict.attrs.wi }}</td></tr>
+<tr><td><b>Weapon</b></td><td>{{ charsheet_dict.weapon }}</td><td><b>Item</b></td><td>{{ charsheet_dict.item.0 }} – {{ charsheet_dict.item.1 }}</td></tr>
+<tr><td><b>Spirit</b></td><td>{{ charsheet_dict.spirit }}</td><td><b>Starting Favor</b></td><td>{{ charsheet_dict.favor }}</td></tr>
+</table>
+{% endblock %}

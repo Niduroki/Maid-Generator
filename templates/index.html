@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block main %}
+<h1>Maid-Generator</h1>
+<input type="text" id="name" ><button onclick="window.location.href='/'+document.getElementById('name').value+'/'">Create my Maid</button><br>
+Example Maid: <a href="/{{ example }}/">{{ example }}</a><br>
+Want to name your Maid after knowing her stats? <a href="/{{ click_me }}/">Create a random character</a>
+
+<h3>Information:</h3>
+The name chosen will always create the same Maid, thus, when creating a Maid for a game, you should choose one name, and stick with it.
+{% endblock %}
