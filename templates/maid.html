@@ -76,17 +76,67 @@ If you chose a name for this tool to create a maid with, you already have a name
 <hr>
 <h1>Character Sheet</h1>
 <table border=1>
-<tr><td><b>Name</b></td><td>{{name}}</td><td><b>Age</b></td><td>…</td></tr>
-<tr><td><b>Maid Colors</b></td></tr>
-<tr><td><b>Clothes</b></td><td>{{charsheet_dict.colors.0}}/{{charsheet_dict.colors.1}}</td><td><b>Eyes</b></td><td>{{charsheet_dict.colors.2}}</td><td><b>Hair</b></td><td>{{charsheet_dict.colors.3}}</td></tr>
-<tr><td><b>Maid Types</b></td><td>{{charsheet_dict.types.0}}/{{charsheet_dict.types.1}}</td></tr>
-<tr><td><b>Special Qualities</b></td><td>{{charsheet_dict.qualities.0}}</td><td>{{charsheet_dict.qualities.1}}</td></tr>
-<tr><td><b>Maid Roots</b></td><td>{{charsheet_dict.root}}</td><td><b>Stress Explosion</b></td><td>{{charsheet_dict.explosion}}</td></tr>
-<tr><td><b>Maid Power</b></td><td>{{charsheet_dict.powers|safe}}</td></tr>
-<tr><td><b>Attributes</b></td></tr>
-<tr><td>Athletics</td><td>Affection</td><td>Skill</td><td>Cunning</td><td>Luck</td><td>Will</td></tr>
-<tr><td>{{ charsheet_dict.attrs.at }}</td><td>{{ charsheet_dict.attrs.af }}</td><td>{{ charsheet_dict.attrs.sk }}</td><td>{{ charsheet_dict.attrs.cu }}</td><td>{{ charsheet_dict.attrs.lu }}</td><td>{{ charsheet_dict.attrs.wi }}</td></tr>
-<tr><td><b>Weapon</b></td><td>{{ charsheet_dict.weapon }}</td><td><b>Item</b></td><td>{{ charsheet_dict.item.0 }} – {{ charsheet_dict.item.1 }}</td></tr>
-<tr><td><b>Spirit</b></td><td>{{ charsheet_dict.spirit }}</td><td><b>Starting Favor</b></td><td>{{ charsheet_dict.favor }}</td></tr>
+<tr>
+  <td><b>Name</b><br>{{name}}</td>
+  <td><b>Age</b><br>…</td>
+</tr>
+<tr>
+  <td><b>Maid Colors</b></td>
+  <td><table>
+    <tr>
+      <td><b>Clothes</b><br>{{charsheet_dict.colors.0}}/{{charsheet_dict.colors.1}}</td>
+      <td><b>Eyes</b><br>{{charsheet_dict.colors.2}}</td>
+      <td><b>Hair</b><br>{{charsheet_dict.colors.3}}</td>
+    </tr>
+  </table></td>
+</tr>
+<tr>
+  <td><b>Maid Types</b></td>
+  <td>{{charsheet_dict.types.0}}/{{charsheet_dict.types.1}}</td>
+</tr>
+<tr>
+  <td><b>Special Qualities</b></td>
+</tr>
+<tr>
+  <td>{{charsheet_dict.qualities.0}}</td>
+  <td>{{charsheet_dict.qualities.1}}</td>
+</tr>
+<tr>
+  <td><b>Maid Roots</b><br>{{charsheet_dict.root}}</td>
+  <td><b>Stress Explosion</b><br>{{charsheet_dict.explosion}}</td>
+</tr>
+<tr>
+  <td><b>Maid Power</b></td>
+  <td>{{charsheet_dict.powers|safe}}</td>
+</tr>
+<tr>
+  <td><b>Attributes</b></td>
+  <td><table>
+    <tr>
+      <td>Athletics</td>
+      <td>Affection</td>
+      <td>Skill</td>
+      <td>Cunning</td>
+      <td>Luck</td>
+      <td>Will</td>
+    </tr>
+    <tr>
+      <td>{{ charsheet_dict.attrs.at }}</td>
+      <td>{{ charsheet_dict.attrs.af }}</td>
+      <td>{{ charsheet_dict.attrs.sk }}</td>
+      <td>{{ charsheet_dict.attrs.cu }}</td>
+      <td>{{ charsheet_dict.attrs.lu }}</td>
+      <td>{{ charsheet_dict.attrs.wi }}</td>
+    </tr>
+  </table></td>
+</tr>
+<tr>
+  <td><b>Weapon</b><br>{{ charsheet_dict.weapon }}</td>
+  <td><b>Item</b><br>{{ charsheet_dict.item.0 }} – {{ charsheet_dict.item.1 }}</td>
+</tr>
+<tr>
+  <td><b>Spirit</b><br>{{ charsheet_dict.spirit }}</td>
+  <td><b>Starting Favor</b><br>{{ charsheet_dict.favor }}</td>
+</tr>
 </table>
 {% endblock %}
