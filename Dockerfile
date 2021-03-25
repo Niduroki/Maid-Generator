@@ -7,7 +7,7 @@ WORKDIR /maid/
 COPY . /maid/
 RUN useradd uwsgi && chown -R uwsgi /maid
 
-EXPOSE 80
+EXPOSE 8000
 
 USER uwsgi
 CMD [ "uwsgi", "maid-py.ini" ]
