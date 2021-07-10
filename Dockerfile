@@ -1,7 +1,7 @@
 FROM python:3-slim
 
 RUN apt-get update && apt-get install -y gcc
-ENV VIRTUAL_ENV=/bingo/venv
+ENV VIRTUAL_ENV=/maid/venv
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
