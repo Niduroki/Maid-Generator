@@ -1,14 +1,16 @@
-FROM python:3-slim
+FROM python:3-alpine
 
-RUN apt-get update && apt-get install -y gcc
+RUN apk add --no-cache gcc libc-dev linux-headers
+
+RUN mkdir /maid/
+WORKDIR /maid/
+
 ENV VIRTUAL_ENV=/maid/venv
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-RUN mkdir /maid/
-WORKDIR /maid/
 COPY . /maid/
-RUN useradd uwsgi && chown -R uwsgi /maid
+RUN adduser -S uwsgi && chown -R uwsgi /maid
 
 EXPOSE 8000
 
