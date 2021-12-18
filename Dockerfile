@@ -1,20 +1,19 @@
 FROM python:3-alpine
 
-RUN apk add --no-cache gcc libc-dev linux-headers
+RUN mkdir /app/
+WORKDIR /app/
 
-RUN mkdir /maid/
-WORKDIR /maid/
-
-ENV VIRTUAL_ENV=/maid/venv
+ENV VIRTUAL_ENV=/app/venv
 RUN python -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
-COPY . /maid/
-RUN adduser -S uwsgi && chown -R uwsgi /maid
+RUN adduser -S app && chown -R app /app
+USER app
+
+RUN pip install --no-cache-dir flask gunicorn
 
 EXPOSE 8000
 
-USER uwsgi
-RUN pip install --no-cache-dir flask uwsgi
+COPY . /app/
 
-CMD [ "uwsgi", "maid-py.ini" ]
+CMD [ "gunicorn", "-b", "0.0.0.0:8000", "maid:app" ]
