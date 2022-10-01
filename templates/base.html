@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 html {
 	font-family: "Arial", sans-serif;
@@ -10,6 +12,12 @@ a:link {
 }
 a {
 	color: #446e9b;
+}
+
+@media only screen and (max-width:500px){
+    body > table > tbody > tr > td:nth-child(1) {
+	min-width: 70vw;
+    }
 }
 </style>
 <title>Maid-Generator</title>
